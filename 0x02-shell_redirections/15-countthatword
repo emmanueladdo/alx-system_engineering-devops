@@ -1,2 +1,2 @@
 #!/bin/bash
-gret -c bin /etc/passwd
+gret -c bin /etc/passwd | wc -l
