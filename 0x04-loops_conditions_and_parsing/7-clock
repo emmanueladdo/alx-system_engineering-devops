@@ -5,10 +5,10 @@ HOUR=0
 MINUTE=1
 while [ $HOUR -le 12 ]; do
     echo "Hour: ${HOUR}"
-    while [ $MINUTE -lt 60 ]; do
+    while [ $MINUTE -le 59 ]; do
 	echo $MINUTE
 	((MINUTE+=1))
     done
-    ((MINUTE=0))
+    ((MINUTE=1))
     ((HOUR+=1))
 done
