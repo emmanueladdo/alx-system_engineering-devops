@@ -1,19 +1,41 @@
 #!/usr/bin/env bash
-# Write a script that:
+# script that:
 # Create file /var/run/myscript.pid
 # containing its PID.
 # Displays "To infinity and beyond" indefinitely.
 # Displays "I hate the kill command" on SIGTERM signal.
 # Displays "Y U no love me?!" on SIGINT signal.
 # Deletes the pid file and terminates on SIGQUIT or SIGTERM signal.
-trap "echo I hate the kill command; exit" SIGTERM
-trap "echo Y U no love me?!" SIGINT
-trap "exit" SIGQUIT
+#!/bin/bash
 
+# Create the file /var/run/myscript.pid containing the PID
 echo $$ > /var/run/myscript.pid
 
+# Function to handle SIGTERM signal
+handle_sigterm() {
+    echo "I hate the kill command"
+}
+
+# Function to handle SIGINT signal
+handle_sigint() {
+    echo "Y U no love me?!"
+}
+
+# Function to handle SIGQUIT and SIGTERM signals
+handle_sigquit() {
+    echo "Deleting /var/run/myscript.pid and terminating..."
+    rm /var/run/myscript.pid
+    exit 0
+}
+
+# Trap signals and assign corresponding handlers
+trap 'handle_sigterm' SIGTERM
+trap 'handle_sigint' SIGINT
+trap 'handle_sigquit' SIGQUIT SIGTERM
+
+# Display "To infinity and beyond" indefinitely
 while true
 do
     echo "To infinity and beyond"
-    sleep 10
+    sleep 1
 done
