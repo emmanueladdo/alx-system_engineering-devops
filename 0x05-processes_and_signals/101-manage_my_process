@@ -9,8 +9,8 @@ start_p() {
 }
 
 stop_p() {
-    rm /var/run/my_process.pid
     pkill -of manage_my_process
+    rm /var/run/my_process.pid
 }
 
 has_arg_1() {
