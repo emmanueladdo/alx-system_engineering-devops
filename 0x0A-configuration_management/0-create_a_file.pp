@@ -1,10 +1,9 @@
 #creat a file called school
 
-$filename = 'tmp/school'
+$filename = '/tmp/school'
 
 file {$filename:
-  ensure  => file,
-  path    => 'tmp/school',
+  ensure  => 'file',
   owner   => 'www-data',
   group   => 'www-data',
   mode    => '0744',
