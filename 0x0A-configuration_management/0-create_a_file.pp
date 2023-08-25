@@ -1,8 +1,6 @@
 #creat a file called school
 
-$filename = '/tmp/school'
-
-file {$filename:
+file { '/tmp/school':
   ensure  => 'file',
   owner   => 'www-data',
   group   => 'www-data',
