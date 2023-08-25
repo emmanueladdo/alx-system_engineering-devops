@@ -1,3 +1,5 @@
+#creat a file called school
+
 $filename = 'tmp/school'
 
 file {$filename:
