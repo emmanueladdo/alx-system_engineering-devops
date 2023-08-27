@@ -1,4 +1,4 @@
-#!/usr/bin/env
+#!/usr/bin/env bash
 #using ~/.ssh/school with user ubuntu
 
 ssh ubuntu -i ~/.ssh/school 
