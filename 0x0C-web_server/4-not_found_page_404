@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# A Script that configures a new Ubuntu machine to Perform a 301-redirection
+
+# Updating Packages before Installations
+sudo apt-get update
+sudo apt-get install -y nginx
+
+# Creating an index.html page
+echo "Hello World!" | sudo tee /var/www/html/index.html
+
+# Performing a 301 Redirection
+redirection_url="https:\/\/github.com\/emmanueladdo"
+string_for_replacement="server_name _;\n\trewrite ^\/redirect_me $redirection_url permanent;"
+sudo sed -i "s/server_name _;/$string_for_replacement/" /etc/nginx/sites-enabled/default
+
+# Creating a 404 Custom error page
+echo "404 Page not found!!!" | sudo tee /var/www/html/404.html
+new_string="listen 80 default_server;\n\terror_page 404 \/404.html;\n\tlocation = \/404.html {\n\t\troot \/var\/www\/html;\n\t\tinternal;\n\t}"
+
+sudo sed -i "s/listen 80 default_server;/$new_string/" /etc/nginx/sites-enabled/default
+
+# Testing configurations for errors
+sudo nginx -t
+
+# restart nginx after implementing changes
+sudo service nginx restart
+
+# Restarting Nginx service
+sudo service nginx restart
