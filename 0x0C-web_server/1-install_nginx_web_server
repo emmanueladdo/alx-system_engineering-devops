@@ -1,21 +1,21 @@
 #!/usr/bin/env bash
 #installs ngnix webserver 
 
-sudo apt-get update
+apt-get update
 
 # Install nginx
-sudo apt-get install nginx -y
+apt-get install nginx -y
 
 # Create the "Hello World!" HTML file
-sudo echo "Hello World!" /var/www/html/index.html
+echo "Hello World!" /var/www/html/index.html
 
 # Create a custom nginx configuration
-sudo bash -c "printf %s 'server {
+printf %s 'server {
     listen 80;
         listen [::]:80;
 	    root   /var/www/html;
 	        index  index.html;
-	}' > /etc/nginx/sites-available/default"
+	}' > /etc/nginx/sites-available/default
 
 # Restart nginx service
 sudo service nginx restart
