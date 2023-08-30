@@ -15,6 +15,13 @@ sudo sed -i "s/server_name _;/$string_for_replacement/" /etc/nginx/sites-enabled
 
 # Creating a 404 Custom error page
 echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
+
+# Give the current user ownership of website files
+sudo chown -R "$USER":"$USER" /var/www/html
+
+# Set permissions for the website directory
+sudo chmod -R 755 /var/www/html
+
 new_string="listen 80 default_server;\n\terror_page 404 \/404.html;\n\tlocation = \/404.html {\n\t\troot \/var\/www\/html;\n\t\tinternal;\n\t}"
 
 sudo sed -i "s/listen 80 default_server;/$new_string/" /etc/nginx/sites-enabled/default
