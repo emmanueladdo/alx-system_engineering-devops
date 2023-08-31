@@ -11,7 +11,7 @@ echo "Hello World!" | sudo tee /var/www/html/index.html
 # Performing a 301 Redirection
 redirection_url="https:\/\/github.com\/emmanueladdo"
 string_for_replacement="server_name _;\n\trewrite ^\/redirect_me $redirection_url permanent;"
-sudo sed -i "s/server_name _;/$string_for_replacement/" /etc/nginx/sites-enabled/default
+sudo sed -i "s/server_name _;/$string_for_replacement/" /etc/nginx/sites-available/default
 
 # Restarting Nginx service
 sudo service nginx restart
