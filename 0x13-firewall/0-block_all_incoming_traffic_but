@@ -1,0 +1,8 @@
+sudo apt update -y             # Update package repositories (-y for automatic confirmation)
+sudo apt install ufw -y        # Install ufw package (-y for automatic confirmation)
+sudo ufw default deny incoming # Set the default incoming policy to deny
+sudo ufw default allow outgoing # Set the default outgoing policy to allow
+sudo ufw allow 22/tcp          # Allow incoming SSH traffic on port 22
+sudo ufw allow http            # Allow incoming HTTP traffic on port 80
+sudo ufw allow https           # Allow incoming HTTPS traffic on port 443
+sudo ufw enable                # Enable ufw
