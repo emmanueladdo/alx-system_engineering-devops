@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# Create a script to create a mysql db backup and convert to tar.gz format using todays date
+# Check for the presence of the MySQL password argument
+if [ $# -ne 1 ]; then
+  echo "Usage: $0 <mysql_password>"
+  exit 1
+fi
+
+# Define the MySQL user and password
+mysql_user="root"
+mysql_password="$1"
+
+# Define the backup directory
+backup_dir="~/"
+
+# Generate the backup filename with today's date
+backup_file="$backup_dir/$(date +'%m-%d-%Y').tar.gz"
+
+# Perform the MySQL dump and save it as backup.sql
+if mysqldump --all-databases -u "$mysql_user" -p"$mysql_password" -r "$backup_dir/backup.sql"; then
+  echo "MySQL dump completed successfully."
+
+  # Create a compressed tar.gz archive from the dump file
+  if tar -czf "$backup_file" -C "$backup_dir" "backup.sql"; then
+    echo "Backup compressed and stored as $backup_file"
+  else
+    echo "Error: Failed to compress the backup."
+  fi
+else
+  echo "Error: MySQL dump failed. Please check your MySQL credentials."
+fi
+
