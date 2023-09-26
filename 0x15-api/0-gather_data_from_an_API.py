@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """using the JSONPlaceholder API:
-   returns information about 
+   returns information about
    the TODO list progress for a given employee
    """
 
