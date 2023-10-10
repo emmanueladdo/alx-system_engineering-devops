@@ -33,12 +33,3 @@ def top_ten(subreddit):
     # Extract and print the titles of the first 10 hot posts
     for post in response.json().get('data', {}).get('children', []):
         print(post.get('data', {}).get('title'))
-
-
-if __name__ == '__main__':
-    import sys
-    if len(sys.argv) < 2:
-        print("Please pass an argument for the subreddit to search.")
-    else:
-        subreddit = sys.argv[1]
-        top_ten(subreddit)
