@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 """
-functions that coiunts
+counts the titles
 """
+
 
 import requests
 
@@ -23,7 +24,7 @@ def count_words(subreddit, word_list, after=None, counts=None):
         for post in children:
             title = post.get('data').get('title').lower()
             for word in word_list:
-                if word in title:
+                if f' {word.lower()} ' in f' {title} ':
                     if word in counts:
                         counts[word] += 1
                     else:
@@ -33,6 +34,7 @@ def count_words(subreddit, word_list, after=None, counts=None):
     if after is not None:
         count_words(subreddit, word_list, after, counts)
     else:
-        sorted_counts = sorted(counts.items(), key=lambda x: (-x[1], x[0]))
+        sorted_counts = sorted(
+            counts.items(), key=lambda x: (-x[1], x[0].lower()))
         for word, count in sorted_counts:
             print(f"{word}: {count}")
