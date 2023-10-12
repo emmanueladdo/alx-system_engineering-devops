@@ -1,6 +1,7 @@
-#fix the "phpp extens"
+# fix the phpp extens
 
-exec {'fix-wordpress':
-  command => 'sed -i s/phpp/php/g /var/www/html/wp-settings.php',
-  path    => '/usr/local/bin/:bin/'
+exec { 'fix-wordpress':
+  command => 'bash -c "sed -i s/class-wp-locale.phpp/class-wp-locale.php/ \
+/var/www/html/wp-settings.php; service apache2 restart"',
+  path    => '/usr/bin:/usr/sbin:/bin'
 }
